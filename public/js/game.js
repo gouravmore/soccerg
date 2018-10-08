@@ -25,6 +25,7 @@ function preload() {
   this.load.image('otherPlayer', 'assets/enemyBlack5.png');
   this.load.image('star', 'assets/star_gold.png');
   this.load.image('atari130xe', 'assets/atari130xe.png');
+  this.load.image('Pitch', 'assets/Pitch 1.png');
 }
 
 function create() {
@@ -32,19 +33,21 @@ function create() {
   self.sys.install('DialogModalPlugin');
 
   // left pole
-  self.physics.add.image(20, 270, 'atari130xe');
-  self.physics.add.image(20, 305, 'atari130xe');
-  self.physics.add.image(20, 340, 'atari130xe');
-  self.physics.add.image(20, 370, 'atari130xe');
-
-  // right pole
-  self.physics.add.image(1180, 270, 'atari130xe');
-  self.physics.add.image(1180, 305, 'atari130xe');
-  self.physics.add.image(1180, 340, 'atari130xe');
-  self.physics.add.image(1180, 370, 'atari130xe');
+  self.physics.add.image(600,350, 'Pitch');
   
-  //this.sys.dialogModal.init();
-  //this.sys.dialogModal.setText('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', true);
+  
+  this.sys.dialogModal.init();
+  this.sys.dialogModal.setText(`1. A football match is played by two teams, You will get selected in one of them.\n
+2. There is no time limit, you can play as much as you want :wink:\n
+3. On every goal, player will get 10 points.\n
+4. Game Controls:\n
+   Up Arrow    = To move forward player\n
+   Left Arrow  = To move player to left side\n
+   Right Arrow = To move player to right side\n
+5. Watch out your score on score board\n
+
+
+HAPPY GAMING!!!`, true);
   this.socket = io();
   this.otherPlayers = this.physics.add.group();
   this.socket.on('currentPlayers', function (players) {

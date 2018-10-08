@@ -100,8 +100,8 @@ io.on('connection', function (socket) {
     console.log(players)
     console.log(star)
     io.emit('starLocation', star);
-    if( ((star.x <= 20) && ((star.y <= 370) || (star.y >= 270))) || ((star.x >= 1180) && ((star.y <= 370) || (star.y >= 270)))){
-      if (players[socket.id].team === 'red') {
+    if( ((star.x <= 180) && ((star.y >= 320) || (star.y <= 410))) || ((star.x >= 1000) && ((star.y <= 410) || (star.y >= 320)))){
+      if (players[socket.id].team === 'red' && (star.x >= 180)) {
         scores.red += 10;
       } else {
         scores.blue += 10;
@@ -111,9 +111,12 @@ io.on('connection', function (socket) {
       star.y = 300;
       io.emit('starLocation', star);
     }
+    if(star.x <= 180 || star.x >=1000){
+      star.x = 600;
+      star.y = 300;
+      io.emit('starLocation', star);
+    }
   });
 });
 
-server.listen(8081, function () {
-  console.log(`Listening on ${server.address().port}`);
-});
+server.listen(process.env.PORT || 5000)
